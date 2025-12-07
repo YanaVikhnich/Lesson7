@@ -3,32 +3,29 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main   # або інша гілка, з якої ти хочеш деплоїти
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+      - main
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      # Якщо треба зібрати сайт (наприклад, npm build), додаєш тут кроки
-      # - name: Build project
-      #   run: npm install && npm run build
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          path: Lesson7/HomeWork   # тут вказуєш свою папку з index.html
+          node-version: '18'
+
+      - name: Build site (if needed)
+        run: |
+          cd Lesson7/HomeWork
+          # If you have a build step, run it here
+          # For static HTML, this can be skipped
 
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: Lesson7/HomeWork
+
