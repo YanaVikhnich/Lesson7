@@ -19,7 +19,7 @@ jobs:
 
       - name: Build site (if needed)
         run: |
-          cd Lesson7/HomeWork
+          cd HomeWork
           # If you have a build step, run it here
           # For static HTML, this can be skipped
 
