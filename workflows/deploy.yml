@@ -27,7 +27,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: HomeWork   # тут вказуєш свою папку з index.html
+          path: Lesson7/HomeWork   # тут вказуєш свою папку з index.html
 
       - name: Deploy to GitHub Pages
         id: deployment
